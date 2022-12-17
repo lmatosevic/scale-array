@@ -17,64 +17,64 @@
 * S - Steps after which to include singular group element into the normal group
 */
 int main() {
-	int N, K, V, G, J, S, i, j, k, g, middle;
-	double *elements, *scaled, *group;
+    int N, K, V, G, J, S, i, j, k, g, middle;
+    double *elements, *scaled, *group;
 
-	printf("Input size of initial array (N): ");
-	scanf("%d", &N);
+    printf("Input size of initial array (N): ");
+    scanf("%d", &N);
 
-	elements = (double *)malloc(N * sizeof(double));
+    elements = (double *) malloc(N * sizeof(double));
 
-	for (i = 0; i < N; i++) {
-		printf("Input element %d/%d: ", i + 1, N);
-		scanf("%lf", elements + i);
-	}
+    for (i = 0; i < N; i++) {
+        printf("Input element %d/%d: ", i + 1, N);
+        scanf("%lf", elements + i);
+    }
 
-	printf("\nInput size of scaled array (K): ");
-	scanf("%d", &K);
+    printf("\nInput size of scaled array (K): ");
+    scanf("%d", &K);
 
-	if (K >= N) {
-		printf("\nThe size of a scaled array must be smaller than the size of a initial array!\n\n");
-		system("pause");
-		return 1;
-	}
+    if (K >= N) {
+        printf("\nThe size of a scaled array must be smaller than the size of a initial array!\n\n");
+        system("pause");
+        return 1;
+    }
 
-	scaled = (double *)malloc(K * sizeof(double));
+    scaled = (double *) malloc(K * sizeof(double));
 
-	V = ceil((double) N / K);
-	G = floor((double) N / V);
-	J = K - G;
-	if (J != 0) {
-		S = floor((double)G / J);
-	} else {
-		S = 0;
-	}
+    V = ceil((double) N / K);
+    G = floor((double) N / V);
+    J = K - G;
+    if (J != 0) {
+        S = floor((double) G / J);
+    } else {
+        S = 0;
+    }
 
-	printf("\nParameters:\nN=%d\nK=%d\nV=%d\nG=%d\nJ=%d\nS=%d\n", N, K, V, G, J, S);
+    printf("\nParameters:\nN=%d\nK=%d\nV=%d\nG=%d\nJ=%d\nS=%d\n", N, K, V, G, J, S);
 
-	group = (double *)malloc(V * sizeof(double));
-	for (i = j = k = g = 0; i < N; i++) {
-		*(group + j) = *(elements + i);
-		j++;
-		if (j == V || (i + 1) == N) {
-			g++;
-			middle = (int) ceil((double) j / 2) - 1;
-			if (S != 0 && g != 0 && g % S == 0 ) {
-				*(scaled + k) = *(group + middle - 1);
-				k++;
-			}
-			*(scaled + k) = *(group + middle);
-			k++;
-			j = 0;
-		}
-	}
+    group = (double *) malloc(V * sizeof(double));
+    for (i = j = k = g = 0; i < N; i++) {
+        *(group + j) = *(elements + i);
+        j++;
+        if (j == V || (i + 1) == N) {
+            g++;
+            middle = (int) ceil((double) j / 2) - 1;
+            if (S != 0 && g != 0 && g % S == 0) {
+                *(scaled + k) = *(group + middle - 1);
+                k++;
+            }
+            *(scaled + k) = *(group + middle);
+            k++;
+            j = 0;
+        }
+    }
 
-	printf("\nScaled array elements:\n");
-	for (i = 0; i < K; i++) {
-		printf("%f ", *(scaled + i));
-	}
+    printf("\nScaled array elements:\n");
+    for (i = 0; i < K; i++) {
+        printf("%f ", *(scaled + i));
+    }
 
-	printf("\n");
-	system("pause");
-	return 0;
+    printf("\n");
+    system("pause");
+    return 0;
 }
