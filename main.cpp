@@ -21,17 +21,17 @@ int main() {
     double *elements, *scaled, *group;
 
     printf("Input size of initial array (N): ");
-    scanf("%d", &N);
+    scanf_s("%d", &N);
 
     elements = (double *) malloc(N * sizeof(double));
 
     for (i = 0; i < N; i++) {
-        printf("Input element %d/%d: ", i + 1, N);
-        scanf("%lf", elements + i);
+        printf("\nInput element %d/%d: ", i + 1, N);
+        scanf_s("%lf", elements + i);
     }
 
     printf("\nInput size of scaled array (K): ");
-    scanf("%d", &K);
+    scanf_s("%d", &K);
 
     if (K >= N) {
         printf("\nThe size of a scaled array must be smaller than the size of a initial array!\n\n");
@@ -59,8 +59,8 @@ int main() {
         if (j == V || (i + 1) == N) {
             g++;
             middle = (int) ceil((double) j / 2) - 1;
-            if (S != 0 && g != 0 && g % S == 0) {
-                *(scaled + k) = *(group + middle - 1);
+            if (S != 0 && g != 0 && g % S == 0 && middle > 0) {
+                *(scaled + k) = *(group + (middle - 1));
                 k++;
             }
             *(scaled + k) = *(group + middle);
@@ -69,12 +69,16 @@ int main() {
         }
     }
 
+    free(group);
+
     printf("\nScaled array elements:\n");
     for (i = 0; i < K; i++) {
         printf("%f ", *(scaled + i));
     }
 
-    printf("\n");
+    free(scaled);
+
+    printf("\n\n");
     system("pause");
     return 0;
 }
