@@ -36,6 +36,7 @@ int main() {
     if (K >= N) {
         printf("\nThe size of a scaled array must be smaller than the size of a initial array!\n\n");
         system("pause");
+        free(elements);
         return 1;
     }
 
@@ -70,6 +71,7 @@ int main() {
     }
 
     free(group);
+    free(elements);
 
     printf("\nScaled array elements:\n");
     for (i = 0; i < K; i++) {
